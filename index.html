@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prateek</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080c10;--bg2:#0d1117;--bg3:#111820;--accent:#00f5c4;--accent2:#0077ff;--accent3:#ff3c5f;--text:#e2e8f0;--muted:#64748b;--border:rgba(0,245,196,0.15);--mono:'Share Tech Mono',monospace;--head:'Rajdhani',sans-serif;--body:'Inter',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--body);overflow-x:hidden;line-height:1.7;}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);pointer-events:none;z-index:999;}
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(0,245,196,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,196,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:0.9rem 3rem;background:rgba(8,12,16,0.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:0.7rem;color:var(--muted);letter-spacing:1px;}
+.topbar-left{display:flex;gap:1.5rem;}
+.topbar-right{display:flex;gap:1.5rem;}
+.topbar a{color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.topbar a:hover{color:var(--accent);}
+.topbar-name{color:var(--text);}
+.wrapper{max-width:860px;margin:0 auto;padding:0 2rem;position:relative;z-index:1;}
+.hero{padding:10rem 0 5rem;}
+.hero-meta{font-family:var(--mono);font-size:0.72rem;color:var(--muted);letter-spacing:2px;margin-bottom:2rem;opacity:0;animation:fadeUp 0.5s ease forwards 0.1s;}
+.hero-meta span{color:var(--accent);}
+.hero-featured{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--mono);font-size:0.7rem;color:var(--accent);border:1px solid var(--border);padding:0.3rem 0.8rem;background:rgba(0,245,196,0.05);margin-bottom:2.5rem;opacity:0;animation:fadeUp 0.5s ease forwards 0.2s;}
+.hero-featured::before{content:'★';font-size:0.6rem;}
+.hero-headline{font-family:var(--head);font-weight:700;font-size:clamp(3.2rem,7vw,5.5rem);line-height:1.05;letter-spacing:-1px;margin-bottom:2rem;opacity:0;animation:fadeUp 0.5s ease forwards 0.3s;}
+.hero-headline em{font-style:italic;color:var(--accent);font-weight:400;}
+.hero-sub{font-family:var(--mono);font-size:0.8rem;color:var(--accent);letter-spacing:2px;margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.5s ease forwards 0.35s;}
+.hero-bio{font-size:1rem;color:var(--muted);max-width:580px;line-height:1.8;margin-bottom:2rem;opacity:0;animation:fadeUp 0.5s ease forwards 0.4s;}
+.hero-links{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:3.5rem;font-family:var(--mono);font-size:0.72rem;opacity:0;animation:fadeUp 0.5s ease forwards 0.5s;}
+.hero-links a{color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.hero-links a:hover{color:var(--accent);}
+.hero-links span{color:var(--border);}
+.hero-quote{font-family:var(--mono);font-size:0.85rem;color:var(--muted);border-left:2px solid var(--accent);padding-left:1.25rem;max-width:560px;line-height:1.7;opacity:0;animation:fadeUp 0.5s ease forwards 0.6s;}
+.divider{border:none;border-top:1px solid var(--border);margin:4rem 0;}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:4rem;}
+.info-cell{background:var(--bg2);padding:1.25rem 1rem;}
+.info-label{font-family:var(--mono);font-size:0.62rem;color:var(--muted);letter-spacing:1px;margin-bottom:0.4rem;display:block;}
+.info-val{font-family:var(--head);font-size:0.95rem;font-weight:600;color:var(--text);}
+.sec-label{font-family:var(--mono);font-size:0.7rem;color:var(--muted);letter-spacing:3px;margin-bottom:2.5rem;display:flex;align-items:center;gap:1rem;}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
+.about-section{margin-bottom:5rem;}
+.about-block{margin-bottom:2rem;}
+.about-block h3{font-family:var(--head);font-size:1rem;font-weight:600;color:var(--accent);margin-bottom:0.75rem;letter-spacing:1px;}
+.about-block p{font-size:0.9rem;color:var(--muted);line-height:1.8;}
+.ticker-wrap{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:0.75rem 0;margin-bottom:5rem;}
+.ticker{display:flex;gap:2.5rem;animation:ticker 30s linear infinite;white-space:nowrap;}
+.ticker-item{font-family:var(--mono);font-size:0.72rem;color:var(--muted);letter-spacing:1px;flex-shrink:0;}
+.ticker-item span{color:var(--accent);margin-right:0.5rem;}
+@keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.projects-section{margin-bottom:5rem;}
+.projects-count{font-family:var(--mono);font-size:0.72rem;color:var(--muted);margin-bottom:2.5rem;}
+.projects-count span{color:var(--accent);}
+.featured-project{border:1px solid rgba(0,245,196,0.3);background:var(--bg2);margin-bottom:1px;transition:background 0.3s;}
+.featured-project:hover{background:var(--bg3);}
+.featured-badge{font-family:var(--mono);font-size:0.65rem;color:var(--accent);letter-spacing:2px;padding:0.6rem 1.5rem;border-bottom:1px solid rgba(0,245,196,0.15);background:rgba(0,245,196,0.04);display:flex;align-items:center;gap:0.5rem;}
+.featured-badge::before{content:'★';font-size:0.6rem;}
+.project-inner{padding:2rem 1.5rem;}
+.project-name{font-family:var(--head);font-size:1.8rem;font-weight:700;color:var(--text);margin-bottom:0.5rem;}
+.project-stack{font-family:var(--mono);font-size:0.68rem;color:var(--muted);letter-spacing:1px;margin-bottom:1.25rem;}
+.project-desc{font-size:0.9rem;color:var(--muted);line-height:1.8;margin-bottom:1rem;max-width:700px;}
+.capabilities-label{font-family:var(--mono);font-size:0.65rem;color:var(--muted);letter-spacing:2px;margin-bottom:1rem;margin-top:1.5rem;}
+.capabilities-list{list-style:none;display:grid;gap:0.5rem;}
+.capabilities-list li{font-size:0.85rem;color:var(--muted);display:flex;gap:0.75rem;line-height:1.5;}
+.capabilities-list li::before{content:'■';color:var(--accent);font-size:0.5rem;flex-shrink:0;margin-top:0.35rem;}
+.other-projects{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:1px;}
+.project-card{background:var(--bg2);transition:background 0.3s;}
+.project-card:hover{background:var(--bg3);}
+.project-card-inner{padding:1.5rem;}
+.card-num{font-family:var(--mono);font-size:0.65rem;color:var(--muted);letter-spacing:2px;margin-bottom:0.75rem;display:block;}
+.card-name{font-family:var(--head);font-size:1.3rem;font-weight:700;margin-bottom:0.25rem;}
+.card-status{font-family:var(--mono);font-size:0.65rem;letter-spacing:1px;margin-bottom:0.75rem;display:block;}
+.card-status.live{color:var(--accent);}
+.card-status.dev{color:#f59e0b;}
+.card-desc{font-size:0.85rem;color:var(--muted);line-height:1.7;}
+.skills-section{margin-bottom:5rem;}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;}
+.skill-group h4{font-family:var(--mono);font-size:0.65rem;color:var(--accent);letter-spacing:2px;margin-bottom:1rem;}
+.skill-group ul{list-style:none;}
+.skill-group li{font-size:0.85rem;color:var(--muted);padding:0.3rem 0;border-bottom:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;gap:0.5rem;}
+.skill-group li::before{content:'·';color:var(--accent);}
+.contact-section{margin-bottom:3rem;}
+.contact-headline{font-family:var(--head);font-size:clamp(2.5rem,5vw,4rem);font-weight:700;line-height:1.1;margin-bottom:1rem;}
+.contact-sub{font-size:0.9rem;color:var(--muted);margin-bottom:3rem;max-width:480px;line-height:1.8;}
+.contact-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);}
+.contact-item{background:var(--bg2);padding:1.5rem;text-decoration:none;transition:background 0.3s;display:block;}
+.contact-item:hover{background:var(--bg3);}
+.contact-type{font-family:var(--mono);font-size:0.65rem;color:var(--accent);letter-spacing:2px;margin-bottom:0.5rem;display:block;}
+.contact-val{font-family:var(--head);font-size:1rem;font-weight:600;color:var(--text);}
+footer{border-top:1px solid var(--border);padding:2rem 0;font-family:var(--mono);font-size:0.68rem;color:var(--muted);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.55s ease,transform 0.55s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--accent);}
+@media(max-width:640px){.topbar{padding:0.8rem 1.25rem;}.topbar-right{display:none;}.wrapper{padding:0 1.25rem;}.hero{padding:8rem 0 3rem;}.other-projects{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <span class="topbar-name">Prateek</span>
+    <span>Vol. I &nbsp;·&nbsp; Est. 2025 &nbsp;·&nbsp; Chandigarh, IN</span>
+  </div>
+  <div class="topbar-right">
+    <a href="#about">ABOUT</a>
+    <a href="#projects">PROJECTS</a>
+    <a href="#skills">SKILLS</a>
+    <a href="#contact">CONTACT</a>
+  </div>
+</div>
+
+<div class="wrapper">
+
+  <section class="hero">
+    <p class="hero-meta">Vol. I &nbsp;·&nbsp; Est. 2025 &nbsp;·&nbsp; <span>Chandigarh, IN</span></p>
+    <div class="hero-featured">Featured — iDEA 2.0 Competitor &nbsp;·&nbsp; Team ShieldOps &nbsp;·&nbsp; PSBs Hackathon 2026</div>
+    <h1 class="hero-headline">Prateek</h1>
+    <p class="hero-sub">Builder &amp; Problem Solver &nbsp;·&nbsp; CSE · Generative AI</p>
+    <p class="hero-bio">A first-year generalist who designs, develops, and ships AI-integrated products — from zombie API forensics platforms for Indian banks to real-world cybersecurity compliance tools that operate under RBI and CERT-In mandates.</p>
+    <div class="hero-links">
+      <a href="mailto:prateekkalkhande9d@gmail.com">prateekkalkhande9d@gmail.com</a>
+      <span>·</span>
+      <a href="https://github.com/Prateekinnovate" target="_blank">github.com/Prateekinnovate</a>
+      <span>·</span>
+      <a href="https://www.linkedin.com/in/prateek-singh-48250b387/" target="_blank">linkedin.com/in/prateek-singh</a>
+    </div>
+    <p class="hero-quote">"I don't just write code — I think about the problem, the user, the market, and then the architecture."</p>
+  </section>
+
+  <hr class="divider">
+
+  <div class="info-grid reveal">
+    <div class="info-cell"><span class="info-label">DEGREE</span><span class="info-val">B.Tech CSE · GenAI</span></div>
+    <div class="info-cell"><span class="info-label">UNIVERSITY</span><span class="info-val">Chandigarh University</span></div>
+    <div class="info-cell"><span class="info-label">YEAR</span><span class="info-val">First Year · 2025–29</span></div>
+    <div class="info-cell"><span class="info-label">CURRENT</span><span class="info-val">iDEA 2.0 · Team ShieldOps</span></div>
+    <div class="info-cell"><span class="info-label">SPECIALITY</span><span class="info-val">Generalist · AI Products</span></div>
+    <div class="info-cell"><span class="info-label">LOCATION</span><span class="info-val">Chandigarh, India</span></div>
+  </div>
+
+  <section id="about" class="about-section reveal">
+    <div class="sec-label">ABOUT</div>
+    <div class="about-block">
+      <h3>Who I Am</h3>
+      <p>First-year Computer Science student specializing in Generative AI at Chandigarh University. I operate at the intersection of product design, backend development, and business strategy — the rare generalist who can sketch a user flow and ship the backend on the same afternoon.</p>
+    </div>
+    <div class="about-block">
+      <h3>How I Build</h3>
+      <p>My process is iterative and problem-first: identify what's broken, understand who it's broken for, then build the minimum version that proves the fix works. From there, I scale. I've built cybersecurity platforms and AI-integrated tools across the full stack, from database to interface. Product design is not a separate phase for me — it's baked into every decision from the first line of code.</p>
+    </div>
+    <div class="about-block">
+      <h3>What I'm Building Now</h3>
+      <p>Currently competing in iDEA 2.0, the PSBs Hackathon Series 2026 organized by Union Bank of India and the Department of Financial Services. Team ShieldOps is building an on-premise zombie API detection and compliance platform for Indian banks — addressing a 62% increase in API attacks on Indian BFSI in H1 2023, with no automated compliance tooling available in the market.</p>
+    </div>
+  </section>
+
+  <div class="ticker-wrap reveal">
+    <div class="ticker">
+      <span class="ticker-item"><span>▸</span>Python</span><span class="ticker-item"><span>▸</span>FastAPI</span><span class="ticker-item"><span>▸</span>React</span><span class="ticker-item"><span>▸</span>PostgreSQL</span><span class="ticker-item"><span>▸</span>Docker</span><span class="ticker-item"><span>▸</span>Generative AI</span><span class="ticker-item"><span>▸</span>LLM APIs</span><span class="ticker-item"><span>▸</span>Product Design</span><span class="ticker-item"><span>▸</span>REST APIs</span><span class="ticker-item"><span>▸</span>GTM Strategy</span><span class="ticker-item"><span>▸</span>Business Modelling</span><span class="ticker-item"><span>▸</span>Prompt Engineering</span><span class="ticker-item"><span>▸</span>Git</span><span class="ticker-item"><span>▸</span>n8n Automation</span><span class="ticker-item"><span>▸</span>UI/UX Thinking</span>
+      <span class="ticker-item"><span>▸</span>Python</span><span class="ticker-item"><span>▸</span>FastAPI</span><span class="ticker-item"><span>▸</span>React</span><span class="ticker-item"><span>▸</span>PostgreSQL</span><span class="ticker-item"><span>▸</span>Docker</span><span class="ticker-item"><span>▸</span>Generative AI</span><span class="ticker-item"><span>▸</span>LLM APIs</span><span class="ticker-item"><span>▸</span>Product Design</span><span class="ticker-item"><span>▸</span>REST APIs</span><span class="ticker-item"><span>▸</span>GTM Strategy</span><span class="ticker-item"><span>▸</span>Business Modelling</span><span class="ticker-item"><span>▸</span>Prompt Engineering</span><span class="ticker-item"><span>▸</span>Git</span><span class="ticker-item"><span>▸</span>n8n Automation</span><span class="ticker-item"><span>▸</span>UI/UX Thinking</span>
+    </div>
+  </div>
+
+  <section id="projects" class="projects-section reveal">
+    <div class="sec-label">PROJECTS</div>
+    <p class="projects-count">— <span>selected works</span></p>
+
+    <div class="featured-project">
+      <div class="featured-badge">Featured Work &nbsp;·&nbsp; iDEA 2.0 &nbsp;·&nbsp; Team ShieldOps &nbsp;·&nbsp; 2026</div>
+      <div class="project-inner">
+        <div class="project-name">ZeroTrace</div>
+        <p class="project-stack">On-Premise Zombie API Discovery &amp; Forensics &nbsp;·&nbsp; Python &nbsp;·&nbsp; Docker &nbsp;·&nbsp; FastAPI &nbsp;·&nbsp; n8n</p>
+        <p class="project-desc">A complete on-premise platform for discovering, classifying, and automatically responding to zombie APIs inside Indian bank networks. ZeroTrace runs entirely inside the bank's perimeter — no data leaves, no cloud dependency. It finds forgotten, unauthenticated endpoints that have been sitting exposed for months or years, assigns each a Threat Persona, and generates RBI-compliant forensic evidence reports automatically.</p>
+        <p class="project-desc">Built for the Union Bank of India PSBs Hackathon Series 2026, competing in PS9 — Zombie API Defence for Cyber Security. Addresses a 62% increase in API attacks on Indian BFSI in H1 2023. Average cost of an API-specific breach in India: ₹3.4 crore. DPDP Act 2023 penalties: up to ₹250 crore. Zero direct incumbent in this market.</p>
+        <p class="capabilities-label">KEY CAPABILITIES</p>
+        <ul class="capabilities-list">
+          <li>Behavioral fingerprinting — probes auth, data exposure, method acceptance on every endpoint</li>
+          <li>4 Threat Personas: Ghost, Sleeper, Relic, Shadow — each with automated n8n response playbooks</li>
+          <li>Honeypot endpoints following bank naming conventions — zero false positives, active attacker detection</li>
+          <li>Blast radius calculation — estimates customer records exposed per vulnerable endpoint</li>
+          <li>Auto-generates RBI &amp; CERT-In forensic evidence packages with Git-traced API biography and kill chain simulation</li>
+          <li>Fully air-gapped deployment — runs inside bank's network, zero external data transfer</li>
+          <li>B2B SaaS — ₹50K to ₹50L/yr targeting 12 PSBs, 21 private banks, 10,000+ NBFCs</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="featured-project" style="margin-top:1px; border-color:rgba(0,119,255,0.3);">
+      <div class="featured-badge" style="color:var(--accent2); border-bottom-color:rgba(0,119,255,0.15); background:rgba(0,119,255,0.04);">Personal Project &nbsp;&#183;&nbsp; HTML · CSS · JS &nbsp;&#183;&nbsp; 2025</div>
+      <div class="project-inner">
+        <div class="project-name">Cyber Citadel</div>
+        <p class="project-stack">Cybersecurity Education &amp; Threat Monitoring Portal &nbsp;·&nbsp; HTML &nbsp;·&nbsp; CSS &nbsp;·&nbsp; JavaScript &nbsp;·&nbsp; OWASP</p>
+        <p class="project-desc">A full-stack cybersecurity education and threat monitoring portal covering the Ten Pillars of Digital Defence — from the CIA Triad and OWASP Top 10 to cryptography, IAM, and GRC compliance frameworks. Built to bridge theoretical security knowledge with practical, interactive implementation.</p>
+        <p class="project-desc">Features a live Threat Monitoring Dashboard with real-time system status indicators and security activity logs, an interactive Cybersecurity Challenge Quiz for knowledge assessment, and structured content across Zero Trust, Least Privilege, network segmentation, and regulatory compliance (GDPR, HIPAA).</p>
+        <p class="capabilities-label">KEY CAPABILITIES</p>
+        <ul class="capabilities-list">
+          <li>Ten Pillars of Digital Defence — CIA Triad, Zero Trust, Least Privilege, Network Segmentation, Data Resilience, Cryptography, IAM, and GRC</li>
+          <li>Interactive Threat Monitoring Dashboard — real-time system status, security activity log, and one-click integrity scan simulation</li>
+          <li>Cybersecurity Challenge Quiz — tests knowledge across network security, web application attacks, and compliance frameworks</li>
+          <li>OWASP Top 10 defences implemented — Injection Flaws (parameterized queries), XSS (input sanitization), Broken Authentication (MFA + session hardening)</li>
+          <li>Covers cryptography end-to-end — Symmetric (AES), Asymmetric (RSA), and Hashing (SHA-256) with real-world use cases</li>
+          <li>Regulatory compliance coverage — GDPR, HIPAA, and internal Acceptable Use Policies mapped to practical security governance</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="other-projects">
+      <div class="project-card">
+        <div class="project-card-inner">
+          <span class="card-num">01</span>
+          <div class="card-name">API Security Research</div>
+          <span class="card-status live">Active Research</span>
+          <p class="card-desc">Deep research into OWASP API Security Top 10, CERT-In advisories, RBI IT Framework for Banks, and India's BFSI threat landscape — forming the foundation for ZeroTrace's detection and compliance engine.</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-card-inner">
+          <span class="card-num">02</span>
+          <div class="card-name">Compliance Automation</div>
+          <span class="card-status dev">In Development</span>
+          <p class="card-desc">Building automated pipelines that produce structured RBI and CERT-In incident reports from raw scan data — eliminating weeks of manual compliance documentation for banking security teams.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="skills-section reveal">
+    <div class="sec-label">SKILLS &amp; STACK</div>
+    <p style="font-size:0.875rem;color:var(--muted);margin-bottom:2.5rem;line-height:1.7;">A generalist's toolkit built across real projects — every skill here has shipped something.</p>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>LANGUAGES &amp; BACKEND</h4>
+        <ul><li>Python</li><li>FastAPI</li><li>Flask</li><li>REST APIs</li><li>SQL / PostgreSQL</li></ul>
+      </div>
+      <div class="skill-group">
+        <h4>FRONTEND &amp; DESIGN</h4>
+        <ul><li>React</li><li>HTML / CSS / JS</li><li>Product Design</li><li>UI/UX Thinking</li><li>Prototyping</li></ul>
+      </div>
+      <div class="skill-group">
+        <h4>AI &amp; AUTOMATION</h4>
+        <ul><li>Generative AI</li><li>LLM APIs</li><li>Prompt Engineering</li><li>n8n Workflows</li><li>AI Product Design</li></ul>
+      </div>
+      <div class="skill-group">
+        <h4>INFRA &amp; TOOLS</h4>
+        <ul><li>Docker · Docker Compose</li><li>Kali Linux</li><li>Git / GitHub</li><li>Nmap · Gobuster</li><li>PostgreSQL / Neo4j</li></ul>
+      </div>
+      <div class="skill-group">
+        <h4>PRODUCT &amp; STRATEGY</h4>
+        <ul><li>Product Thinking</li><li>GTM Strategy</li><li>Business Modelling</li><li>Research &amp; Analysis</li><li>Project Management</li></ul>
+      </div>
+      <div class="skill-group">
+        <h4>CYBERSECURITY</h4>
+        <ul><li>API Security (OWASP)</li><li>RBI IT Framework</li><li>CERT-In Compliance</li><li>Threat Modelling</li><li>Forensic Evidence</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section reveal">
+    <div class="sec-label">CONTACT</div>
+    <h2 class="contact-headline">Let's build<br>something<br>worth building.</h2>
+    <p class="contact-sub">Open to internships, collaborations, and problems worth solving. First year, but shipping since day one.</p>
+    <div class="contact-links">
+      <a class="contact-item" href="mailto:prateekkalkhande9d@gmail.com"><span class="contact-type">EMAIL</span><span class="contact-val">prateekkalkhande9d@gmail.com</span></a>
+      <a class="contact-item" href="https://github.com/Prateekinnovate" target="_blank"><span class="contact-type">GITHUB</span><span class="contact-val">github.com/Prateekinnovate</span></a>
+      <a class="contact-item" href="https://www.linkedin.com/in/prateek-singh-48250b387/" target="_blank"><span class="contact-type">LINKEDIN</span><span class="contact-val">Prateek Singh</span></a>
+    </div>
+  </section>
+
+  <footer class="reveal">
+    <span>© 2026 Prateek</span>
+    <span>Chandigarh University &nbsp;·&nbsp; CSE &nbsp;·&nbsp; Generative AI</span>
+  </footer>
+
+</div>
+
+<script>
+const obs = new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
